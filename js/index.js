@@ -20,10 +20,18 @@ class Menu{
 class Pedido{
     constructor(){
         this.orden = [];
+        this.costoTotal = 0;
     }
     
-    cargarPedido(obj){
-        this.orden.push(obj)
+    cargarPedido(obj,cantidad){
+        for (let index = 1; index <= cantidad; index++){
+            this.orden.push(obj);  
+        }
+        this.orden = this.orden.map((el) => {return{nombre: el.nombre, precio: el.precio}}); 
+    }
+
+    calcularCostoTotal(){
+        this.costoTotal = this.orden.reduce( (acu,el) => acu + el.precio, 0 );
     }
 }
 
@@ -65,7 +73,7 @@ miMenu.cargarHamburguesas(new Hamburguesa("Mexicanita", "Palta", "Tomates confit
 miMenu.cargarHamburguesas(new Hamburguesa("Argenta", "Rucula", "Tomates", "Huevo", "Alioli", 900 ));
 
 miMenu.cargarPizzas(new Pizza("Especial", "Jamon", "Pimiento", "Aceitunas", 950 ));
-miMenu.cargarPizzas(new Pizza("Agridulce", "Jamon crudo", "Rucula", "Queso Brie", 1000 ));
+miMenu.cargarPizzas(new Pizza("Agridulce", "Jamon crudo", "Cebollas caramelizadas", "Queso azul", 1000 ));
 miMenu.cargarPizzas(new Pizza("De la casa", "Ternera", "Huevo", "Pimiento", 1100 ));
 
 miMenu.cargarBirra(new Birra("Honey","5%", 200));
@@ -93,7 +101,15 @@ function mostrarMenu(){
 
 }
 
-mostrarMenu();
+// mostrarMenu();
+
+// miPedido.cargarPedido(miMenu.birras[0],2);
+// miPedido.cargarPedido(miMenu.pizzas[1],1);
+// miPedido.cargarPedido(miMenu.hamburguesas[2],2);
+
+// console.log(miPedido.orden);
+// miPedido.calcularCostoTotal();
+// console.log(miPedido.costoTotal);
 
 
 

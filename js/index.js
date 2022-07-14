@@ -33,6 +33,18 @@ class Pedido{
     calcularCostoTotal(){
         this.costoTotal = this.orden.reduce( (acu,el) => acu + el.precio, 0 );
     }
+
+    mostrarPedido(){
+        let mostrar = [];
+
+        mostrar.push(`---- Su pedido ------------`);
+        this.orden.forEach((item) => mostrar.push(` ${item.nombre}: $${item.precio}`));
+        
+        this.calcularCostoTotal();
+        mostrar.push(`---- Precio total ------------> $${this.costoTotal}`);
+        
+        console.log(mostrar.join(`\n`));
+    }
 }
 
 class Hamburguesa{
@@ -103,11 +115,11 @@ function mostrarMenu(){
 
 // mostrarMenu();
 
-// miPedido.cargarPedido(miMenu.birras[0],2);
-// miPedido.cargarPedido(miMenu.pizzas[1],1);
-// miPedido.cargarPedido(miMenu.hamburguesas[2],2);
+miPedido.cargarPedido(miMenu.birras[0],2);
+miPedido.cargarPedido(miMenu.pizzas[1],1);
+miPedido.cargarPedido(miMenu.hamburguesas[2],2);
 
-// console.log(miPedido.orden);
+miPedido.mostrarPedido();
 // miPedido.calcularCostoTotal();
 // console.log(miPedido.costoTotal);
 

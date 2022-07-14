@@ -4,6 +4,7 @@ class Menu{
         this.hamburguesas = [];
         this.pizzas = [];
         this.birras = [];
+        this.arrayMenu = []; 
     }
 
     cargarHamburguesas(obj){
@@ -14,6 +15,28 @@ class Menu{
     }
     cargarBirra(obj){
         this.birras.push(obj);
+    }
+    mostrarMenu(){
+    
+        let mostrar = [];
+    
+        mostrar.push(`----Hamburguesas------------`);
+        this.hamburguesas.forEach((item) => mostrar.push(`$${item.precio} ${item.nombre}: ${item.ingred1}, ${item.ingred2}, ${item.ingred3}, ${item.aderezo}.`));
+    
+        mostrar.push(`----Pizzas------------------`);
+        this.pizzas.forEach((item) => mostrar.push(`$${item.precio} ${item.nombre}: ${item.ingred1}, ${item.ingred2}, ${item.ingred3}.`));
+        
+        mostrar.push(`----Birras------------------`);
+        this.birras.forEach((item) =>  mostrar.push(`$${item.precio} ${item.nombre}: Grad. Alcoh: ${item.gradAlco}`));
+    
+        console.log(mostrar.join(`\n`));
+    
+    }
+    cargarArrayMenu(){
+        // Este metodo permite cargar en un array todos los elementos del menu
+        this.hamburguesas.forEach( (el) => this.arrayMenu.push(el));
+        this.pizzas.forEach( (el) => this.arrayMenu.push(el));
+        this.birras.forEach( (el) => this.arrayMenu.push(el));
     }
 }
 
@@ -76,6 +99,19 @@ class Birra{
     }
 }
 
+function IsValidItem(item,cantidad){
+
+    if(miMenu.arrayMenu.some( (el) => el.nombre === item) && (cantidad <= 10 && cantidad >= 1)){
+        item = miMenu.arrayMenu.find( (el) => el.nombre === item);
+        miPedido.cargarPedido(item,cantidad);
+        return false;
+    }
+    else{
+        alert('¡Ingrese un item o cantidad validos!')
+        return true;
+    }
+}
+
 /*---- Instancias ----*/
 
 const miMenu = new Menu();
@@ -89,39 +125,31 @@ miMenu.cargarPizzas(new Pizza("Agridulce", "Jamon crudo", "Cebollas caramelizada
 miMenu.cargarPizzas(new Pizza("De la casa", "Ternera", "Huevo", "Pimiento", 1100 ));
 
 miMenu.cargarBirra(new Birra("Honey","5%", 200));
-miMenu.cargarBirra(new Birra("Trigeña","6%", 250));
+miMenu.cargarBirra(new Birra("Trigo","6%", 250));
 miMenu.cargarBirra(new Birra("Scottish","7%", 300));
 
 const miPedido = new Pedido();
 
-/* Funciones    */
+const title = (word) => word[0].toUpperCase() + word.substring(1).toLowerCase();
 
-function mostrarMenu(){
-    
-    let mostrarMenu = [];
+miMenu.cargarArrayMenu();
 
-    mostrarMenu.push(`----Hamburguesas------------`);
-    miMenu.hamburguesas.forEach((item) => mostrarMenu.push(`$${item.precio} ${item.nombre}: ${item.ingred1}, ${item.ingred2}, ${item.ingred3}, ${item.aderezo}.`));
+miMenu.mostrarMenu();
 
-    mostrarMenu.push(`----Pizzas------------------`);
-    miMenu.pizzas.forEach((item) => mostrarMenu.push(`$${item.precio} ${item.nombre}: ${item.ingred1}, ${item.ingred2}, ${item.ingred3}.`));
-    
-    mostrarMenu.push(`----Birras------------------`);
-    miMenu.birras.forEach((item) =>  mostrarMenu.push(`$${item.precio} ${item.nombre}: Grad. Alcoh: ${item.gradAlco}`));
+let it = 'y';
+let item = '';
 
-    console.log(mostrarMenu.join(`\n`));
+alert('¡Bienvenido a Mr.Burgui!');
 
+while( it === 'y'){
+
+    do{
+        item = title(prompt("¿Que desea pedir? [Seleccione una opción del menú]"));
+        cantidad = parseInt(prompt("¿Cuántas unidades desea encargar?"));
+
+    }while(IsValidItem(item,cantidad))
+
+    it = prompt("¿Desea agregar otro item?  [ y / n ]").toLowerCase();
 }
 
-// mostrarMenu();
-
-miPedido.cargarPedido(miMenu.birras[0],2);
-miPedido.cargarPedido(miMenu.pizzas[1],1);
-miPedido.cargarPedido(miMenu.hamburguesas[2],2);
-
 miPedido.mostrarPedido();
-// miPedido.calcularCostoTotal();
-// console.log(miPedido.costoTotal);
-
-
-

@@ -12,8 +12,24 @@ class Menu{
     cargarBirra(obj){
         this.birras.push(obj);
     }
-    mostrarMenu(){
-    
+    mostrar(){
+
+        for ( const item of this.hamburguesas){
+            let container = document.createElement('div')
+            container.innerHTML = `<h3> ${item.nombre} $${item.precio} </h3>
+                                    <p> ${item.ingred1}, ${item.ingred2}, 
+                                    ${item.ingred3}, ${item.aderezo} </p>`;
+            document.body.append(container);
+        }
+        for ( const item of this.birras){
+            let container = document.createElement('div')
+            container.innerHTML = `<h3> ${item.nombre} $${item.precio} </h3>
+                                    <p> ${item.gradAlco} </p>`;
+            document.body.append(container);
+        }
+    }
+    mostrarConsola(){
+
         let mostrar = [];
     
         mostrar.push(`----Hamburguesas------------`);
@@ -23,8 +39,8 @@ class Menu{
         this.birras.forEach((item) =>  mostrar.push(`$${item.precio} ${item.nombre}: Grad. Alcoh: ${item.gradAlco}`));
     
         console.log(mostrar.join(`\n`));
-    
     }
+
     cargarArrayMenu(){
         // Este metodo permite cargar en un array todos los elementos del menu
         this.hamburguesas.forEach( (el) => this.arrayMenu.push(el));
@@ -49,16 +65,23 @@ class Pedido{
         this.costoTotal = this.orden.reduce( (acu,el) => acu + el.precio, 0 );
     }
 
-    mostrarPedido(){
-        let mostrar = [];
+    mostrar(){
 
-        mostrar.push(`---- Su pedido ------------`);
-        this.orden.forEach((item) => mostrar.push(` ${item.nombre}: $${item.precio}`));
-        
+        let container = document.createElement('div')
+        container.innerHTML = `<h3> ---- Su pedido ------------ </h3>`;
+        document.body.append(container);
+
+        for ( const item of this.orden){
+            let container = document.createElement('div')
+            container.innerHTML = `<h4>${item.nombre} $${item.precio} </h4>`;
+            document.body.append(container);
+        }
+
         this.calcularCostoTotal();
-        mostrar.push(`---- Precio total ------------> $${this.costoTotal}`);
-        
-        console.log(mostrar.join(`\n`));
+
+        let container1 = document.createElement('div')
+            container1.innerHTML = `<h3>---- Precio total ------------> $${this.costoTotal}</h3>`;
+            document.body.append(container1);
     }
 }
 
@@ -112,12 +135,17 @@ miMenu.cargarBirra(new Birra("Scottish","7%", 300));
 miMenu.cargarBirra(new Birra("Lemon","8%", 350));
 
 miMenu.cargarArrayMenu();
-miMenu.mostrarMenu();
+
+miMenu.mostrarConsola();
+miMenu.mostrar();
+
+
+
 
 let it = 'y';
 let item = '';
 
-alert('¡Bienvenido a Mr.Burgui!');
+// alert('¡Bienvenido a Mr.Burgui!');
 
 while( it === 'y'){
 
@@ -130,4 +158,4 @@ while( it === 'y'){
     it = prompt("¿Desea agregar otro item?  [ y / n ]").toLowerCase();
 }
 
-miPedido.mostrarPedido();
+miPedido.mostrar();

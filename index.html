@@ -7,10 +7,13 @@
 
     <!-- Framework Bulma -->
     <link rel="stylesheet" href="./css/bulma.css">
+
+    <!-- Mi estilo -->
+    <link rel="stylesheet" href="./css/style.css">
     <title>Mr.Burgui</title>
 </head>
 <body>
-    <header>
+  <header>
         <nav class="navbar" role="navigation" aria-label="main navigation">
             <div class="navbar-brand">
               <a class="navbar-item" href="https://bulma.io">
@@ -45,47 +48,41 @@
               </div>
             </div>
         </nav>
-    </header>
-    <main>
+  </header>
+  <main>
 
-
-<div class="column is-half is-offset-one-quarter">
-    <div class="card">
-        <div class="card-content">
-          <div class="media">
-            <div class="media-left">
+    <div class="column is-half is-offset-one-fifth">
+      <div class="card">
+          <div class="card-content">
+            <div class="media">
+              <div class="media-left">
                 <figure class="image is-128x128">
-                    <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
+                  <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
                 </figure>
-            </div>
-            <div class="media-content">
-                <p class="title is-4">John Smith</p>
-                <p class="subtitle is-6">"Hongos", "Queso Azul", "Cebolla caramelizada", "Barbacoa"</p>
+              </div>
+              <div class="media-content">
+                <div class="column">
+                  <div class="column">
+                    <p class="title is-4">Parisina</p>
+                  </div>
+                  <div class="column">
+                    <p class="subtitle is-6">"Hongos", "Queso Azul", "Cebolla caramelizada", "Barbacoa"</p>
+                  </div>
+                  <div class="columns is-mobile">
+                    <div class="column is-6"></div>
+                    <div class="column is-2"><div class="button is-warning">-</div></div>
+                    <div class="column is-2"><input class="input is-rounded is-small " type="text" placeholder="1"></div>
+                    <div class="column is-2"><div class="button is-warning">+</div></div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
+      </div>
     </div>
-    <div class="card">
-        <div class="card-content">
-          <div class="media">
-            <div class="media-left">
-                <figure class="image is-128x128">
-                    <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
-                </figure>
-            </div>
-            <div class="media-content">
-                <p class="title is-4">John Smith</p>
-                <p class="subtitle is-6">"Hongos", "Queso Azul", "Cebolla caramelizada", "Barbacoa"</p>
-            </div>
-          </div>
-        </div>
-    </div>
-</div>
 
-    </main>
-
-
-    <script src="./js/index.js" type="module"></script>
-    <script src="./js/metaData.js" type="module"></script>
+  </main>
+  <script src="./js/index.js" type="module"></script>
+  <script src="./js/metaData.js" type="module"></script>
 </body>
 </html>

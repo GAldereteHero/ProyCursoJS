@@ -11,33 +11,77 @@ class Menu{
     cargarBirra(obj){
         this.birras.push(obj);
     }
-    mostrar(){
-        
-        for ( const item of this.hamburguesas){
-            let container = document.createElement('div')
-            container.innerHTML = `<h3> ${item.nombre} $${item.precio} </h3>
-            <p> ${item.ingred1}, ${item.ingred2}, 
-            ${item.ingred3}, ${item.aderezo} </p>`;
-            document.body.append(container);
-        }
-        for ( const item of this.birras){
-            let container = document.createElement('div')
-            container.innerHTML = `<h3> ${item.nombre} $${item.precio} </h3>
-                                    <p> ${item.gradAlco} </p>`;
-            document.body.append(container);
-        }
-    }
-    mostrarConsola(){
-        
-        let mostrar = [];
-        
-        mostrar.push(`----Hamburguesas------------`);
-        this.hamburguesas.forEach((item) => mostrar.push(`$${item.precio} ${item.nombre}: ${item.ingred1}, ${item.ingred2}, ${item.ingred3}, ${item.aderezo}.`));
-        
-        mostrar.push(`----Birras------------------`);
-        this.birras.forEach((item) =>  mostrar.push(`$${item.precio} ${item.nombre}: Grad. Alcoh: ${item.gradAlco}`));
+    mostrar = () => {
+        const contBurguers = document.getElementById('Burguers');
+        const contBirras = document.getElementById('Birras');
     
-        console.log(mostrar.join(`\n`));
+        this.hamburguesas.forEach( (elemento)=> {
+            const div = document.createElement('div');
+            div.innerHTML += `<div class="column is-half is-offset-one-fifth">
+            <div class="card">
+                <div class="card-content">
+                  <div class="media">
+                    <div class="media-left">
+                      <figure class="image is-128x128">
+                        <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
+                      </figure>
+                    </div>
+                    <div class="media-content">
+                      <div class="column">
+                        <div class="column">
+                          <p class="title is-4">${elemento.nombre} $${elemento.precio}</p>
+                        </div>
+                        <div class="column">
+                          <p class="subtitle is-6">${elemento.ingred1}, ${elemento.ingred2}, ${elemento.ingred3}, ${elemento.aderezo}.</p>
+                        </div>
+                        <div class="columns is-mobile">
+                          <div class="column is-6"></div>
+                          <div class="column is-2"><div class="button is-warning">-</div></div>
+                          <div class="column is-2"><input class="input is-rounded is-small " type="text" placeholder="0"></div>
+                          <div class="column is-2"><div class="button is-warning">+</div></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+          </div>`;
+            contBurguers.appendChild(div);
+        })
+
+        this.birras.forEach( (elemento)=> {
+            const div = document.createElement('div');
+            div.innerHTML += `<div class="column is-half is-offset-one-fifth">
+            <div class="card">
+                <div class="card-content">
+                  <div class="media">
+                    <div class="media-left">
+                      <figure class="image is-128x128">
+                        <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
+                      </figure>
+                    </div>
+                    <div class="media-content">
+                      <div class="column">
+                        <div class="column">
+                          <p class="title is-4">${elemento.nombre} $${elemento.precio}</p>
+                        </div>
+                        <div class="column">
+                          <p class="subtitle is-6"> Graduación Alcoh.: ${elemento.gradAlco}.</p>
+                        </div>
+                        <div class="columns is-mobile">
+                          <div class="column is-6"></div>
+                          <div class="column is-2"><div class="button is-warning">-</div></div>
+                          <div class="column is-2"><input class="input is-rounded is-small " type="text" placeholder="0"></div>
+                          <div class="column is-2"><div class="button is-warning">+</div></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+          </div>`;
+            contBirras.appendChild(div);
+        })
     }
 
     cargarArrayMenu(){

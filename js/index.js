@@ -1,5 +1,6 @@
 import { Menu, Pedido, Hamburguesa, Birra, title} from './metaData.js'
 
+const arraySaludos = ['¡Las mejores hamburguesas de Mr. Burgui!', '¡Bienvenido a Mr.Burgui!', '¡Comparti con amigos una Burgui!'];
 /*---- Instancias ----*/
 
 const miMenu = new Menu();
@@ -19,6 +20,10 @@ miMenu.cargarBirra(new Birra(8,"Lemon","8%", 350));
 miMenu.cargarArrayMenu();
 miMenu.mostrarConsola();
 miMenu.mostrar();
+
+let msjBienvenida = document.getElementById('saludo');
+
+msjBienvenida.innerText = arraySaludos[2];
 
 let it = 'y';
 let item = '';

@@ -17,22 +17,22 @@ miMenu.cargarBirra(new Birra(7,"Scottish","7%", 300));
 miMenu.cargarBirra(new Birra(8,"Lemon","8%", 350));
 
 miMenu.cargarArrayMenu();
-miMenu.mostrarConsola();
-miMenu.mostrar();
+// miMenu.mostrarConsola();
+// miMenu.mostrar();
 
-let it = 'y';
-let item = '';
-let cantidad = 0;
+// let it = 'y';
+// let item = '';
+// let cantidad = 0;
 
-while( it === 'y'){
+// while( it === 'y'){
 
-    do{
-        item = title(prompt("¿Que desea pedir? [Seleccione una opción del menú]"));
-        cantidad = parseInt(prompt("¿Cuántas unidades desea encargar?"));
+//     do{
+//         item = title(prompt("¿Que desea pedir? [Seleccione una opción del menú]"));
+//         cantidad = parseInt(prompt("¿Cuántas unidades desea encargar?"));
 
-    }while(miPedido.IsValidItem(miMenu, item, cantidad))
+//     }while(miPedido.IsValidItem(miMenu, item, cantidad))
 
-    it = prompt("¿Desea agregar otro item?  [ y / n ]").toLowerCase();
-}
+//     it = prompt("¿Desea agregar otro item?  [ y / n ]").toLowerCase();
+// }
 
-miPedido.mostrar();
+// miPedido.mostrar();

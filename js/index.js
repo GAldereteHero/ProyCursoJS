@@ -6,16 +6,20 @@ const miMenu = new Menu();
 
 const miPedido = new Pedido();
 
-miMenu.cargarHamburguesas(new Hamburguesa(1,"Parisina", "Hongos", "Queso Azul", "Cebolla caramelizada", "Barbacoa", 800 ));
-miMenu.cargarHamburguesas(new Hamburguesa(2,"Mexicanita", "Palta", "Tomates confitados", "Pimientos asados", "Barbacoa", 850 ));
-miMenu.cargarHamburguesas(new Hamburguesa(3,"Argenta", "Rucula", "Tomates", "Huevo", "Alioli", 900 ));
-miMenu.cargarHamburguesas(new Hamburguesa(4,"Yankie", "Panceta", "Aros de cebolla", "Cheddar", "Alioli", 950 ));
+miMenu.cargarItem(new Hamburguesa('h1',"Parisina", "Hongos", "Queso Azul", "Cebolla caramelizada", "Barbacoa", 800 ));
+miMenu.cargarItem(new Hamburguesa('h2',"Mexicanita", "Palta", "Tomates confitados", "Pimientos asados", "Barbacoa", 850 ));
+miMenu.cargarItem(new Hamburguesa('h3',"Argenta", "Rucula", "Tomates", "Huevo", "Alioli", 900 ));
+miMenu.cargarItem(new Hamburguesa('h4',"Yankie", "Panceta", "Aros de cebolla", "Cheddar", "Alioli", 950 ));
 
-miMenu.cargarBirra(new Birra(5,"Honey","5%", 200));
-miMenu.cargarBirra(new Birra(6,"Trigo","6%", 250));
-miMenu.cargarBirra(new Birra(7,"Scottish","7%", 300));
-miMenu.cargarBirra(new Birra(8,"Lemon","8%", 350));
+miMenu.cargarItem(new Birra('b1',"Honey","5%", 200));
+miMenu.cargarItem(new Birra('b2',"Trigo","6%", 250));
+miMenu.cargarItem(new Birra('b3',"Scottish","7%", 300));
+miMenu.cargarItem(new Birra('b4',"Lemon","8%", 350));
 
-miMenu.cargarArrayMenu();
+// console.log(miMenu.cargarMenu());
 
-miMenu.mostrar();
+// miMenu.arrayMenu.forEach( (el) => console.log(el.id[0]) );
+
+miMenu.renderMenu();
+
+

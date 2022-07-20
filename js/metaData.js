@@ -1,55 +1,51 @@
 class Menu{
     constructor(){
-        this.hamburguesas = [];
-        this.birras = [];
         this.arrayMenu = []; 
     }
 
-    cargarHamburguesas(obj){
-        this.hamburguesas.push(obj);
+    cargarItem(obj){
+      this.arrayMenu.push(obj);
     }
-    cargarBirra(obj){
-        this.birras.push(obj);
-    }
-    mostrar = () => {
-        const contBurguers = document.getElementById('Burguers');
-        const contBirras = document.getElementById('Birras');
+
+    renderMenu = () => {
+      const contBurguers = document.getElementById('Burguers');
+      const contBirras = document.getElementById('Birras');
     
-        this.hamburguesas.forEach( (elemento)=> {
-            const div = document.createElement('div');
-            div.innerHTML += `<div class="column is-half is-offset-one-fifth">
-            <div class="card">
-                <div class="card-content">
-                  <div class="media">
-                    <div class="media-left">
-                      <figure class="image is-128x128">
-                        <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
-                      </figure>
-                    </div>
-                    <div class="media-content">
+      this.arrayMenu.forEach( (elemento)=> {
+        if (elemento.id[0] === 'h') {
+          const div = document.createElement('div');
+          div.innerHTML += `<div class="column is-half is-offset-one-fifth">
+          <div class="card">
+              <div class="card-content">
+                <div class="media">
+                  <div class="media-left">
+                    <figure class="image is-128x128">
+                      <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
+                    </figure>
+                  </div>
+                  <div class="media-content">
+                    <div class="column">
                       <div class="column">
-                        <div class="column">
-                          <p class="title is-4">${elemento.nombre} $${elemento.precio}</p>
-                        </div>
-                        <div class="column">
-                          <p class="subtitle is-6">${elemento.ingred1}, ${elemento.ingred2}, ${elemento.ingred3}, ${elemento.aderezo}.</p>
-                        </div>
-                        <div class="columns is-mobile">
-                          <div class="column is-6"></div>
-                          <div class="column is-2"><div class="button is-warning">-</div></div>
-                          <div class="column is-2"><input class="input is-rounded is-small " type="text" placeholder="0"></div>
-                          <div class="column is-2"><div class="button is-warning">+</div></div>
-                        </div>
+                        <p class="title is-4">${elemento.nombre} $${elemento.precio}</p>
+                      </div>
+                      <div class="column">
+                        <p class="subtitle is-6">${elemento.ingred1}, ${elemento.ingred2}, ${elemento.ingred3}, ${elemento.aderezo}.</p>
+                      </div>
+                      <div class="columns is-mobile">
+                        <div class="column is-6"></div>
+                        <div class="column is-2"><div class="button is-warning">-</div></div>
+                        <div class="column is-2"><input class="input is-rounded is-small " type="text" placeholder="0"></div>
+                        <div class="column is-2"><div class="button is-warning">+</div></div>
                       </div>
                     </div>
                   </div>
                 </div>
+              </div>
             </div>
           </div>`;
-            contBurguers.appendChild(div);
-        })
-
-        this.birras.forEach( (elemento)=> {
+          contBurguers.appendChild(div);
+            
+          }else if (elemento.id[0] === 'b'){
             const div = document.createElement('div');
             div.innerHTML += `<div class="column is-half is-offset-one-fifth">
             <div class="card">
@@ -80,14 +76,9 @@ class Menu{
                 </div>
             </div>
           </div>`;
-            contBirras.appendChild(div);
+          contBirras.appendChild(div);
+          }
         })
-    }
-
-    cargarArrayMenu(){
-        // Este metodo permite cargar en un array todos los elementos del menu
-        this.hamburguesas.forEach( (el) => this.arrayMenu.push(el));
-        this.birras.forEach( (el) => this.arrayMenu.push(el));
     }
 }
 

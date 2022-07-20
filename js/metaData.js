@@ -7,7 +7,7 @@ class Menu{
       this.arrayMenu.push(obj);
     }
 
-    renderMenu = () => {
+    renderMenu = (objPedido) => {
       const contBurguers = document.getElementById('Burguers');
       const contBirras = document.getElementById('Birras');
     
@@ -32,10 +32,8 @@ class Menu{
                         <p class="subtitle is-6">${elemento.ingred1}, ${elemento.ingred2}, ${elemento.ingred3}, ${elemento.aderezo}.</p>
                       </div>
                       <div class="columns is-mobile">
-                        <div class="column is-6"></div>
-                        <div class="column is-2"><div class="button is-warning">-</div></div>
-                        <div class="column is-2"><input class="input is-rounded is-small " type="text" placeholder="0"></div>
-                        <div class="column is-2"><div class="button is-warning">+</div></div>
+                        <div class="column is-10"></div>
+                        <div class="column is-2"><div class="button is-warning" id="${elemento.id}burguer">+</div></div>
                       </div>
                     </div>
                   </div>
@@ -44,6 +42,13 @@ class Menu{
             </div>
           </div>`;
           contBurguers.appendChild(div);
+
+          const boton = document.getElementById(`${elemento.id}burguer`);
+
+          boton.addEventListener('click', ()=>{
+              objPedido.cargarPedido(elemento,1);
+              alert(`Se agrego tu hamb.: ${elemento.nombre}`)
+          })
             
           }else if (elemento.id[0] === 'b'){
             const div = document.createElement('div');
@@ -65,10 +70,8 @@ class Menu{
                           <p class="subtitle is-6"> Graduación Alcoh.: ${elemento.gradAlco}.</p>
                         </div>
                         <div class="columns is-mobile">
-                          <div class="column is-6"></div>
-                          <div class="column is-2"><div class="button is-warning">-</div></div>
-                          <div class="column is-2"><input class="input is-rounded is-small " type="text" placeholder="0"></div>
-                          <div class="column is-2"><div class="button is-warning">+</div></div>
+                          <div class="column is-10"></div>
+                          <div class="column is-2"><div class="button is-warning" id="${elemento.id}birra">+</div></div>
                         </div>
                       </div>
                     </div>
@@ -77,6 +80,13 @@ class Menu{
             </div>
           </div>`;
           contBirras.appendChild(div);
+
+          const boton = document.getElementById(`${elemento.id}birra`);
+
+          boton.addEventListener('click', ()=>{
+              objPedido.cargarPedido(elemento,1);
+              alert(`Se agrego tu birra: ${elemento.nombre}`)
+          })
           }
         })
     }

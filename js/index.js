@@ -20,6 +20,8 @@ miMenu.cargarItem(new Birra('b4',"Lemon","8%", 350));
 
 // miMenu.arrayMenu.forEach( (el) => console.log(el.id[0]) );
 
-miMenu.renderMenu();
+miMenu.renderMenu(miPedido);
 
+const botonVerMiPedido = document.getElementById("verMiPedido")
 
+botonVerMiPedido.addEventListener("click", () => console.log(miPedido.orden))

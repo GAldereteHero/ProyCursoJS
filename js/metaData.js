@@ -20,7 +20,7 @@ class Menu{
                 <div class="media">
                   <div class="media-left">
                     <figure class="image is-128x128">
-                      <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
+                      <img src="../img/h1.png" alt="Placeholder image">
                     </figure>
                   </div>
                   <div class="media-content">
@@ -47,7 +47,7 @@ class Menu{
 
           boton.addEventListener('click', ()=>{
               objPedido.cargarPedido(elemento,1);
-              alert(`Se agrego tu hamb.: ${elemento.nombre}`)
+              alert(`Se agrego tu hamb.: ${elemento.nombre}`);
           })
             
           }else if (elemento.id[0] === 'b'){
@@ -57,8 +57,8 @@ class Menu{
                 <div class="card-content">
                   <div class="media">
                     <div class="media-left">
-                      <figure class="image is-128x128">
-                        <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
+                      <figure class="image is-96x96">
+                        <img src="../img/b1.png" alt="Placeholder image">
                       </figure>
                     </div>
                     <div class="media-content">
@@ -85,7 +85,7 @@ class Menu{
 
           boton.addEventListener('click', ()=>{
               objPedido.cargarPedido(elemento,1);
-              alert(`Se agrego tu birra: ${elemento.nombre}`)
+              alert(`Se agrego tu birra: ${elemento.nombre}`);
           })
           }
         })
@@ -138,6 +138,28 @@ class Pedido{
             alert('¡Ingrese un item o cantidad validos!')
             return true;
         }
+    }
+    renderPedido(){
+
+      const contMiPedido = document.getElementById('miPedido');
+      const div = document.createElement('div');
+      let miPedido = JSON.parse(sessionStorage.getItem('miPedido'));
+
+      miPedido.forEach( (el) => {
+
+        div.innerHTML =`
+                      <div class="column is-half is-offset-one-fifth">
+                        <div class="card-content">
+                          <div class="media">
+                            <p>${el.nombre}</p>
+                          </div>
+                        </div>
+                      </div>`;
+
+        contMiPedido.appendChild(div);
+
+      })
+      
     }
 }   
 

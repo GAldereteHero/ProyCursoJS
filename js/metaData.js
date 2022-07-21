@@ -19,7 +19,7 @@ class Menu {
           ` <div class="card">
                 <div class="card-image">
                   <figure class="image is-square">
-                    <img src="../img/h1.png" alt="Hamburguesa">
+                    <img src="../img/${elemento.id}.png" alt="Hamburguesa">
                   </figure>
                 </div>
                 <div class="card-content">
@@ -48,45 +48,46 @@ class Menu {
 
         boton.addEventListener('click', () => {
           objPedido.cargarPedido(elemento, 1);
-          alert(`Se agrego tu hamb.: ${elemento.nombre}`);
+          // sessionStorage.setItem(`${elemento.id}`, JSON.stringify(elemento));
+          alert(`Se agrego tu burguer: ${elemento.nombre}`);
+          objPedido.renderPedido();
         })
 
       } else if (elemento.id[0] === 'b') {
         const div = document.createElement('div');
         div.className = 'column';
         div.innerHTML += `
-            <div class="card">
-              <div class="card-image">
-                <figure class="image is-128x128">
-                  <img src="../img/b1.png" alt="Cerveza">
-                </figure>
-              </div>
-              <div class="card-content">
-                <div class="media">
-                  <div class="media-content">
-                    <p class="title is-4">${elemento.nombre}</p>
-                  </div>
-                  <div class="media-right">
-                    <p class="title is-4">$ ${elemento.precio}</p>
-                  </div>
+        <div class="card">
+            <div class="card-content">
+              <div class="media">
+                <div class="media-left">
+                  <figure class="image is-48x48">
+                    <img src="../img/${elemento.id}.png" alt="Cerveza">
+                  </figure>
                 </div>
-                <div class="content">
-                  <p class=""> Grad. Alcoh.: ${elemento.gradAlco}</p>
+                <div class="media-content">
+                  <p class="title is-4">${elemento.nombre}</p>
+                  <p class="">Grad. Alcoh.: ${elemento.gradAlco}</p>
+                </div>
+                <div class="media-content">
+                  <p class="title is-4">$ ${elemento.precio}</p>
                 </div>
               </div>
-              <div class="card-footer">
-                <div class="card-footer-item">
-                  <div class="button is-warning" id="${elemento.id}birra">Añadir</div>
-                </div> 
-              </div>
-            </div>`;
+            </div>
+            <div class="card-footer">
+              <div class="card-footer-item">
+                <div class="button is-warning" id="${elemento.id}birra">Añadir</div>
+              </div> 
+            </div>
+          </div>`;
         contBirras.appendChild(div);
 
         const boton = document.getElementById(`${elemento.id}birra`);
 
         boton.addEventListener('click', () => {
           objPedido.cargarPedido(elemento, 1);
-          alert(`Se agrego tu: ${elemento.nombre}`);
+          alert(`Se agrego tu birra: ${elemento.nombre}`);
+          objPedido.renderPedido();
         })
       }
     })
@@ -103,57 +104,28 @@ class Pedido {
     for (let index = 1; index <= cantidad; index++) {
       this.orden.push(obj);
     }
-    // this.orden = this.orden.map((el) => {return{id: el.id, nombre: el.nombre, precio: el.precio}}); 
+  
   }
 
   calcularCostoTotal() {
     this.costoTotal = this.orden.reduce((acu, el) => acu + el.precio, 0);
   }
 
-  mostrar() {
-
-    let container = document.createElement('div')
-    container.innerHTML = `<h3> ---- Su pedido ------------ </h3>`;
-    document.body.append(container);
-
-    for (const item of this.orden) {
-      let container = document.createElement('div')
-      container.innerHTML = `<h4>${item.nombre} $${item.precio} </h4>`;
-      document.body.append(container);
-    }
-
-    this.calcularCostoTotal();
-
-    let container1 = document.createElement('div')
-    container1.innerHTML = `<h3>---- Precio total ------------> $${this.costoTotal}</h3>`;
-    document.body.append(container1);
-  }
-  IsValidItem(menu, item, cantidad) {
-
-    if (menu.arrayMenu.some((el) => el.nombre === item) && (cantidad <= 10 && cantidad >= 1)) {
-      item = menu.arrayMenu.find((el) => el.nombre === item);
-      this.cargarPedido(item, cantidad);
-      return false;
-    }
-    else {
-      alert('¡Ingrese un item o cantidad validos!')
-      return true;
-    }
-  }
   renderPedido() {
 
     const contMiPedido = document.getElementById('contPedido');
     const contPrecioTotal = document.getElementById('precioTotal');
     const newRow = document.createElement('tr');
-    let miPedido = JSON.parse(sessionStorage.getItem('miPedido'));
+    let count = 1;
 
-    miPedido.forEach((el) => {
+    this.orden.forEach((el) => {
       newRow.innerHTML = `
-            <th>${el.id}</th>
+            <th>${count}</th>
             <td>${el.nombre}</td>
             <td>$ ${el.precio}</td>
           `;
       contMiPedido.appendChild(newRow);
+      count += 1;
     })
 
     this.calcularCostoTotal();

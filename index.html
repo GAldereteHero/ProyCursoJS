@@ -5,10 +5,8 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <!-- Framework Bulma -->
   <link rel="stylesheet" href="./css/bulma.css">
-
   <!-- Mi estilo -->
   <link rel="stylesheet" href="./css/style.css">
   <title>Mr.Burgui</title>
@@ -53,9 +51,27 @@
   </header>
 
   <main>
-    <section id="Burguers"></section>
-    <section id="Birras"></section>
+    <div class="block"></div>
+    <section>
+      <div class="container is-fluid">
+        <div class="notification is-primary">
+          <div class="columns" id="Burguers">
 
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="block"></div>
+    <section>
+      <div class="container is-fluid">
+        <div class="notification is-primary">
+          <div class="columns" id="Birras">
+
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="block"></div>
     <section id="miPedido">
       <div class="container is-max-desktop">
         <div class="notification is-primary">
@@ -74,9 +90,7 @@
                 <th id="precioTotal"></th>
               </tr>
             </tfoot>
-            <tbody id="contPedido">
-              
-            </tbody>
+            <tbody id="contPedido"></tbody>
           </table>
         </div>
       </div>

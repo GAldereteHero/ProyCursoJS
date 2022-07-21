@@ -19,7 +19,7 @@ class Menu {
           ` <div class="card">
                 <div class="card-image">
                   <figure class="image is-square">
-                    <img src="../img/${elemento.id}.png" alt="Hamburguesa">
+                    <img src="./img/${elemento.id}.png" alt="Hamburguesa">
                   </figure>
                 </div>
                 <div class="card-content">
@@ -62,7 +62,7 @@ class Menu {
               <div class="media">
                 <div class="media-left">
                   <figure class="image is-48x48">
-                    <img src="../img/${elemento.id}.png" alt="Cerveza">
+                    <img src="./img/${elemento.id}.png" alt="Cerveza">
                   </figure>
                 </div>
                 <div class="media-content">

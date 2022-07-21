@@ -1,0 +1,11 @@
+body{
+    /* background-image: url("../img/stacked-waves-haikei.svg"); */
+    /* background-size: auto; */
+    background-color: #9073e5e3;
+}
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }

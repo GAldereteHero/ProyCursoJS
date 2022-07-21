@@ -7,37 +7,14 @@ const miMenu = new Menu();
 
 const miPedido = new Pedido();
 
-miMenu.cargarHamburguesas(new Hamburguesa(1,"Parisina", "Hongos", "Queso Azul", "Cebolla caramelizada", "Barbacoa", 800 ));
-miMenu.cargarHamburguesas(new Hamburguesa(2,"Mexicanita", "Palta", "Tomates confitados", "Pimientos asados", "Barbacoa", 850 ));
-miMenu.cargarHamburguesas(new Hamburguesa(3,"Argenta", "Rucula", "Tomates", "Huevo", "Alioli", 900 ));
-miMenu.cargarHamburguesas(new Hamburguesa(4,"Yankie", "Panceta", "Aros de cebolla", "Cheddar", "Alioli", 950 ));
+miMenu.cargarItem(new Hamburguesa('h1',"Alemana", "Cebolla rebozada", "Bacon", "Queso cheddar", "Barbacoa", 800 ));
+miMenu.cargarItem(new Hamburguesa('h2',"Mexicana", "Guacamole", "Chili", "Queso cheddar", "Salsa ahumada", 850 ));
+miMenu.cargarItem(new Hamburguesa('h3',"Francesa", "Lechuga", "Cebolla caramelizada", "Queso de cabra", "Salsa de miel", 900 ));
+miMenu.cargarItem(new Hamburguesa('h4',"Americana", "Bacon", "Queso cheddar", "Huevo", "Salsa ahumada", 950 ));
 
-miMenu.cargarBirra(new Birra(5,"Honey","5%", 200));
-miMenu.cargarBirra(new Birra(6,"Trigo","6%", 250));
-miMenu.cargarBirra(new Birra(7,"Scottish","7%", 300));
-miMenu.cargarBirra(new Birra(8,"Lemon","8%", 350));
+miMenu.cargarItem(new Birra('b1',"Honey","5%", 200));
+miMenu.cargarItem(new Birra('b2',"Trigo","6%", 250));
+miMenu.cargarItem(new Birra('b3',"Scottish","7%", 300));
+miMenu.cargarItem(new Birra('b4',"Red Ale","8%", 350));
 
-miMenu.cargarArrayMenu();
-miMenu.mostrarConsola();
-miMenu.mostrar();
-
-let msjBienvenida = document.getElementById('saludo');
-
-msjBienvenida.innerText = arraySaludos[2];
-
-let it = 'y';
-let item = '';
-let cantidad = 0;
-
-while( it === 'y'){
-
-    do{
-        item = title(prompt("¿Que desea pedir? [Seleccione una opción del menú]"));
-        cantidad = parseInt(prompt("¿Cuántas unidades desea encargar?"));
-
-    }while(miPedido.IsValidItem(miMenu, item, cantidad))
-
-    it = prompt("¿Desea agregar otro item?  [ y / n ]").toLowerCase();
-}
-
-miPedido.mostrar();
+miMenu.renderMenu(miPedido);

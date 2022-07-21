@@ -1,15 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mr.Burgui</title>
-</head>
-<body>
-    <h1 id="saludo">Nuestras hamburguesas</h1>
 
-    <script src="./js/index.js" type="module"></script>
-    <script src="./js/metaData.js" type="module"></script>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="" href="./img/ico.png">
+  <!-- Framework Bulma -->
+  <link rel="stylesheet" href="./css/bulma.css">
+  <!-- Mi estilo -->
+  <link rel="stylesheet" href="./css/style.css">
+  <title>Mr.Burgui</title>
+</head>
+
+<body>
+  <header>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="https://galderetehero.github.io/ProyCursoJS/">
+          <img src="./img/ico.png" >
+        </a>
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+      <div id="navbarBasicExample" class="navbar-menu">
+        <div class="navbar-start">
+          <a class="navbar-item" href="./index.html">Home</a>
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link">More</a>
+            <div class="navbar-dropdown">
+              <a class="navbar-item">Nosotros</a>
+              <a class="navbar-item">Contacto</a>
+              <hr class="navbar-divider">
+            </div>
+          </div>
+        </div>
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <div class="buttons">
+              <a class="button is-warning" id="verMiPedido" href="#miPedido">
+                <strong>Mi pedido</strong>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <div class="container mt-6"></div>
+    <div class="container is-widescreen">
+      <div class="columns">
+        <div class="column is-2">
+          <figure class="image is-128x128">
+            <img class="is-rounded" src="./img/ico.png">
+          </figure>
+        </div>
+        <div class="column is-10 mt-5">
+          <p class="title is-2 has-text-white">¡Disfrutá de las mejores Hamburguesas con amigos!</p>
+        </div>
+      </div>
+    </div>
+    <div class="container mt-6"></div>
+    <section>
+      <div class="container is-widescreen">
+          <div class="columns" id="Burguers">
+          </div>
+      </div>
+    </section>
+    <div class="block"></div>
+    <section>
+      <div class="container is-widescreen">
+          <div class="columns" id="Birras">
+          </div>
+      </div>
+    </section>
+    <div class="block"></div>
+    <section id="miPedido">
+      <div class="container is-widescreen">
+        <div class="notification is-warning">
+          <table class="table is-fullwidth">
+            <thead>
+              <tr>
+                <th>Item</th>
+                <th>Descripción</th>
+                <th>Precio</th>
+              </tr>
+            </thead>
+            <tfoot>
+              <tr>
+                <th>Tu pedido</th>
+                <th>Precio total</th>
+                <th id="precioTotal"></th>
+              </tr>
+            </tfoot>
+            <tbody id="contPedido"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+  <div class="container mt-6"></div>
+  <footer class="footer py-4">
+    <div class="content has-text-centered">
+      <p>
+        This site was built with <a href="https://bulma.io/">Bulma</a> by <a href="https://galderetehero.github.io/ProyCursoJS/">Gonzalo Alderete Hero.</a>
+      </p>
+    </div>
+  </footer>
+  <script src="./js/index.js" type="module"></script>
+  <script src="./js/metaData.js" type="module"></script>
 </body>
+
 </html>

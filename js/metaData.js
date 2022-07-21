@@ -1,122 +1,160 @@
-class Menu{
-    constructor(){
-        this.hamburguesas = [];
-        this.birras = [];
-        this.arrayMenu = []; 
-    }
+class Menu {
+  constructor() {
+    this.arrayMenu = [];
+  }
 
-    cargarHamburguesas(obj){
-        this.hamburguesas.push(obj);
-    }
-    cargarBirra(obj){
-        this.birras.push(obj);
-    }
-    mostrar(){
-        
-        for ( const item of this.hamburguesas){
-            let container = document.createElement('div')
-            container.innerHTML = `<h3> ${item.nombre} $${item.precio} </h3>
-            <p> ${item.ingred1}, ${item.ingred2}, 
-            ${item.ingred3}, ${item.aderezo} </p>`;
-            document.body.append(container);
-        }
-        for ( const item of this.birras){
-            let container = document.createElement('div')
-            container.innerHTML = `<h3> ${item.nombre} $${item.precio} </h3>
-                                    <p> ${item.gradAlco} </p>`;
-            document.body.append(container);
-        }
-    }
-    mostrarConsola(){
-        
-        let mostrar = [];
-        
-        mostrar.push(`----Hamburguesas------------`);
-        this.hamburguesas.forEach((item) => mostrar.push(`$${item.precio} ${item.nombre}: ${item.ingred1}, ${item.ingred2}, ${item.ingred3}, ${item.aderezo}.`));
-        
-        mostrar.push(`----Birras------------------`);
-        this.birras.forEach((item) =>  mostrar.push(`$${item.precio} ${item.nombre}: Grad. Alcoh: ${item.gradAlco}`));
-    
-        console.log(mostrar.join(`\n`));
-    }
+  cargarItem(obj) {
+    this.arrayMenu.push(obj);
+  }
 
-    cargarArrayMenu(){
-        // Este metodo permite cargar en un array todos los elementos del menu
-        this.hamburguesas.forEach( (el) => this.arrayMenu.push(el));
-        this.birras.forEach( (el) => this.arrayMenu.push(el));
-    }
+  renderMenu = (objPedido) => {
+    const contBurguers = document.getElementById('Burguers');
+    const contBirras = document.getElementById('Birras');
+
+    this.arrayMenu.forEach((elemento) => {
+      if (elemento.id[0] === 'h') {
+        const div = document.createElement('div');
+        div.className = 'column';
+        div.innerHTML +=
+          ` <div class="card">
+                <div class="card-image">
+                  <figure class="image is-square">
+                    <img src="../img/${elemento.id}.png" alt="Hamburguesa">
+                  </figure>
+                </div>
+                <div class="card-content">
+                  <div class="media">
+                    <div class="media-content">
+                      <p class="title is-4">${elemento.nombre}</p>
+                    </div>
+                    <div class="media-right">
+                      <p class="title is-4">$ ${elemento.precio}</p>
+                    </div>
+                  </div>
+                  <div class="content">
+                    <p class="">${elemento.ingred1}, ${elemento.ingred2}, ${elemento.ingred3}, ${elemento.aderezo}.</p>
+                  </div>
+                </div>
+                <div class="card-footer">
+                  <div class="card-footer-item">
+                    <div class="button is-warning" id="${elemento.id}burguer">Añadir</div>
+                  </div> 
+                </div>
+            </div>`;
+
+        contBurguers.appendChild(div);
+
+        const boton = document.getElementById(`${elemento.id}burguer`);
+
+        boton.addEventListener('click', () => {
+          objPedido.cargarPedido(elemento, 1);
+          // sessionStorage.setItem(`${elemento.id}`, JSON.stringify(elemento));
+          alert(`Se agrego tu burguer: ${elemento.nombre}`);
+          objPedido.renderPedido();
+        })
+
+      } else if (elemento.id[0] === 'b') {
+        const div = document.createElement('div');
+        div.className = 'column';
+        div.innerHTML += `
+        <div class="card">
+            <div class="card-content">
+              <div class="media">
+                <div class="media-left">
+                  <figure class="image is-48x48">
+                    <img src="../img/${elemento.id}.png" alt="Cerveza">
+                  </figure>
+                </div>
+                <div class="media-content">
+                  <p class="title is-4">${elemento.nombre}</p>
+                  <p class="">Grad. Alcoh.: ${elemento.gradAlco}</p>
+                </div>
+                <div class="media-content">
+                  <p class="title is-4">$ ${elemento.precio}</p>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer">
+              <div class="card-footer-item">
+                <div class="button is-warning" id="${elemento.id}birra">Añadir</div>
+              </div> 
+            </div>
+          </div>`;
+        contBirras.appendChild(div);
+
+        const boton = document.getElementById(`${elemento.id}birra`);
+
+        boton.addEventListener('click', () => {
+          objPedido.cargarPedido(elemento, 1);
+          alert(`Se agrego tu birra: ${elemento.nombre}`);
+          objPedido.renderPedido();
+        })
+      }
+    })
+  }
 }
 
-class Pedido{
-    constructor(){
-        this.orden = [];
-        this.costoTotal = 0;
-    }
-    
-    cargarPedido(obj,cantidad){
-        for (let index = 1; index <= cantidad; index++){
-            this.orden.push(obj);  
-        }
-        this.orden = this.orden.map((el) => {return{nombre: el.nombre, precio: el.precio}}); 
-    }
-    
-    calcularCostoTotal(){
-        this.costoTotal = this.orden.reduce( (acu,el) => acu + el.precio, 0 );
-    }
-    
-    mostrar(){
+class Pedido {
+  constructor() {
+    this.orden = [];
+    this.costoTotal = 0;
+  }
 
-        let container = document.createElement('div')
-        container.innerHTML = `<h3> ---- Su pedido ------------ </h3>`;
-        document.body.append(container);
-        
-        for ( const item of this.orden){
-            let container = document.createElement('div')
-            container.innerHTML = `<h4>${item.nombre} $${item.precio} </h4>`;
-            document.body.append(container);
-        }
-        
-        this.calcularCostoTotal();
-        
-        let container1 = document.createElement('div')
-        container1.innerHTML = `<h3>---- Precio total ------------> $${this.costoTotal}</h3>`;
-        document.body.append(container1);
+  cargarPedido(obj, cantidad) {
+    for (let index = 1; index <= cantidad; index++) {
+      this.orden.push(obj);
     }
-    IsValidItem(menu, item, cantidad){
+  
+  }
 
-        if(menu.arrayMenu.some( (el) => el.nombre === item) && (cantidad <= 10 && cantidad >= 1)){
-            item = menu.arrayMenu.find( (el) => el.nombre === item);
-            this.cargarPedido(item,cantidad);
-            return false;
-        }
-        else{
-            alert('¡Ingrese un item o cantidad validos!')
-            return true;
-        }
-    }
-}   
+  calcularCostoTotal() {
+    this.costoTotal = this.orden.reduce((acu, el) => acu + el.precio, 0);
+  }
 
-class Hamburguesa{
-    constructor(id, nombre, ingred1, ingred2, ingred3, aderezo, precio){
-        this.id = id;
-        this.nombre = nombre;
-        this.ingred1 = ingred1;
-        this.ingred2 = ingred2;
-        this.ingred3 = ingred3;
-        this.aderezo = aderezo;
-        this.precio = precio;
-    }
+  renderPedido() {
+
+    const contMiPedido = document.getElementById('contPedido');
+    const contPrecioTotal = document.getElementById('precioTotal');
+    const newRow = document.createElement('tr');
+    let count = 1;
+
+    this.orden.forEach((el) => {
+      newRow.innerHTML = `
+            <th>${count}</th>
+            <td>${el.nombre}</td>
+            <td>$ ${el.precio}</td>
+          `;
+      contMiPedido.appendChild(newRow);
+      count += 1;
+    })
+
+    this.calcularCostoTotal();
+    contPrecioTotal.innerText = `$ ${this.costoTotal}`;
+
+  }
 }
 
-class Birra{
-    constructor(id, nombre, gradAlco, precio){
-        this.id = id;
-        this.nombre = nombre;
-        this.gradAlco = gradAlco;
-        this.precio = precio;
-    }
+class Hamburguesa {
+  constructor(id, nombre, ingred1, ingred2, ingred3, aderezo, precio) {
+    this.id = id;
+    this.nombre = nombre;
+    this.ingred1 = ingred1;
+    this.ingred2 = ingred2;
+    this.ingred3 = ingred3;
+    this.aderezo = aderezo;
+    this.precio = precio;
+  }
+}
+
+class Birra {
+  constructor(id, nombre, gradAlco, precio) {
+    this.id = id;
+    this.nombre = nombre;
+    this.gradAlco = gradAlco;
+    this.precio = precio;
+  }
 }
 
 const title = (word) => word[0].toUpperCase() + word.substring(1).toLowerCase();
 
-export { Menu, Pedido, Hamburguesa, Birra, title}
+export { Menu, Pedido, Hamburguesa, Birra, title }

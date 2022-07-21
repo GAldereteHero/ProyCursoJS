@@ -102,7 +102,7 @@ class Pedido{
         for (let index = 1; index <= cantidad; index++){
             this.orden.push(obj);  
         }
-        this.orden = this.orden.map((el) => {return{nombre: el.nombre, precio: el.precio}}); 
+        // this.orden = this.orden.map((el) => {return{id: el.id, nombre: el.nombre, precio: el.precio}}); 
     }
     
     calcularCostoTotal(){
@@ -141,24 +141,22 @@ class Pedido{
     }
     renderPedido(){
 
-      const contMiPedido = document.getElementById('miPedido');
-      const div = document.createElement('div');
+      const contMiPedido = document.getElementById('contPedido');
+      const contPrecioTotal = document.getElementById('precioTotal');
+      const newRow = document.createElement('tr');
       let miPedido = JSON.parse(sessionStorage.getItem('miPedido'));
 
       miPedido.forEach( (el) => {
-
-        div.innerHTML =`
-                      <div class="column is-half is-offset-one-fifth">
-                        <div class="card-content">
-                          <div class="media">
-                            <p>${el.nombre}</p>
-                          </div>
-                        </div>
-                      </div>`;
-
-        contMiPedido.appendChild(div);
-
+        newRow.innerHTML =`
+            <th>${el.id}</th>
+            <td>${el.nombre}</td>
+            <td>$ ${el.precio}</td>
+          `;
+        contMiPedido.appendChild(newRow);
       })
+
+      this.calcularCostoTotal();
+      contPrecioTotal.innerText = `$ ${this.costoTotal}`;
       
     }
 }   

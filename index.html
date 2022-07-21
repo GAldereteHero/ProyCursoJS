@@ -1,62 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Framework Bulma -->
-    <link rel="stylesheet" href="./css/bulma.css">
+  <!-- Framework Bulma -->
+  <link rel="stylesheet" href="./css/bulma.css">
 
-    <!-- Mi estilo -->
-    <link rel="stylesheet" href="./css/style.css">
-    <title>Mr.Burgui</title>
+  <!-- Mi estilo -->
+  <link rel="stylesheet" href="./css/style.css">
+  <title>Mr.Burgui</title>
 </head>
+
 <body>
   <header>
-        <nav class="navbar" role="navigation" aria-label="main navigation">
-            <div class="navbar-brand">
-              <a class="navbar-item" href="https://bulma.io">
-                <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
-              </a>
-              <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="https://bulma.io">
+          <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
+        </a>
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+      <div id="navbarBasicExample" class="navbar-menu">
+        <div class="navbar-start">
+          <a class="navbar-item">Home</a>
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link">More</a>
+            <div class="navbar-dropdown">
+              <a class="navbar-item">Nosotros</a>
+              <a class="navbar-item">Contacto</a>
+              <hr class="navbar-divider">
+            </div>
+          </div>
+        </div>
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <div class="buttons">
+              <a class="button is-primary" id="verMiPedido" href="#miPedido">
+                <strong>Mi pedido</strong>
               </a>
             </div>
-            <div id="navbarBasicExample" class="navbar-menu">
-              <div class="navbar-start">
-                <a class="navbar-item">Home</a>
-                <div class="navbar-item has-dropdown is-hoverable">
-                  <a class="navbar-link">More</a>
-                  <div class="navbar-dropdown">
-                    <a class="navbar-item">Nosotros</a>
-                    <a class="navbar-item">Contacto</a>
-                    <hr class="navbar-divider">
-                  </div>
-                </div>
-              </div>
-              <div class="navbar-end">
-                <div class="navbar-item">
-                  <div class="buttons">
-                    <a class="button is-primary" id="verMiPedido" href="#miPedido">
-                      <strong>Mi pedido</strong>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-        </nav>
+          </div>
+        </div>
+      </div>
+    </nav>
   </header>
-  <main>
 
+  <main>
     <section id="Burguers"></section>
     <section id="Birras"></section>
-    <section id="miPedido"></section>
-    
+
+    <section id="miPedido">
+      <div class="container is-max-desktop">
+        <div class="notification is-primary">
+          <table class="table is-fullwidth">
+            <thead>
+              <tr>
+                <th>Item</th>
+                <th>Descripcion</th>
+                <th>Precio</th>
+              </tr>
+            </thead>
+            <tfoot>
+              <tr>
+                <th>Tu pedido</th>
+                <th>Precio total</th>
+                <th id="precioTotal"></th>
+              </tr>
+            </tfoot>
+            <tbody id="contPedido">
+              
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
   </main>
+
   <script src="./js/index.js" type="module"></script>
   <script src="./js/metaData.js" type="module"></script>
 </body>
+
 </html>

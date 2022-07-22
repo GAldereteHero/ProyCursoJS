@@ -1,3 +1,73 @@
+const title = (word) => word[0].toUpperCase() + word.substring(1).toLowerCase();
+
+class Hamburguesa {
+  constructor(id, nombre, ingred1, ingred2, ingred3, aderezo, precio, cantidad) {
+    this.id = id;
+    this.nombre = nombre;
+    this.ingred1 = ingred1;
+    this.ingred2 = ingred2;
+    this.ingred3 = ingred3;
+    this.aderezo = aderezo;
+    this.precio = precio;
+    this.cantidad = cantidad;
+  }
+}
+
+class Birra {
+  constructor(id, nombre, gradAlco, precio, cantidad) {
+    this.id = id;
+    this.nombre = nombre;
+    this.gradAlco = gradAlco;
+    this.precio = precio;
+    this.cantidad = cantidad;
+  }
+}
+
+class Pedido {
+  constructor() {
+    this.orden = [];
+    this.costoTotal = 0;
+  }
+
+  // cargarPedido(obj, cantidad) {
+  //   for (let index = 1; index <= cantidad; index++) {
+  //     this.orden.push(obj);
+  //   }
+
+  // }
+
+  calcularCostoTotal() {
+    let itemsSessionStorage = JSON.parse(sessionStorage.getItem('items'));
+    this.costoTotal = itemsSessionStorage.reduce((acu, el) => acu + el.precio, 0);
+  }
+
+  renderPedido() {
+
+    let contMiPedido = document.getElementById('contPedido');
+    contMiPedido.innerHTML = '';
+    let contPrecioTotal = document.getElementById('precioTotal');
+    let itemsSessionStorage = JSON.parse(sessionStorage.getItem('items'));
+    let count = 1;
+    
+    itemsSessionStorage.forEach((el) => {
+      let newRow = document.createElement('tr');
+      newRow.innerHTML = `
+            <th>${count}</th>
+            <td>${el.nombre}</td>
+            <td>$ ${el.precio}</td>
+            <td>${el.cantidad}</td>
+            <td>$ ${el.precio * el.cantidad} </td>
+          `;
+      contMiPedido.appendChild(newRow);
+      count += 1;
+    })
+
+    this.calcularCostoTotal();
+    contPrecioTotal.innerText = `$ ${this.costoTotal}`;
+
+  }
+}
+
 class Menu {
   constructor() {
     this.arrayMenu = [];
@@ -7,7 +77,7 @@ class Menu {
     this.arrayMenu.push(obj);
   }
 
-  renderMenu = (objPedido) => {
+  renderMenu = (miPedido) => {
     const contBurguers = document.getElementById('Burguers');
     const contBirras = document.getElementById('Birras');
 
@@ -47,10 +117,22 @@ class Menu {
         const boton = document.getElementById(`${elemento.id}burguer`);
 
         boton.addEventListener('click', () => {
-          objPedido.cargarPedido(elemento, 1);
-          // sessionStorage.setItem(`${elemento.id}`, JSON.stringify(elemento));
-          alert(`Se agrego tu burguer: ${elemento.nombre}`);
-          objPedido.renderPedido();
+
+          let listaItemsPedido;
+          let itemsSessionStorage = JSON.parse(sessionStorage.getItem('items'));
+
+          if (itemsSessionStorage) {
+            listaItemsPedido = itemsSessionStorage;
+          } else {
+            listaItemsPedido = [];
+          }
+
+          listaItemsPedido.push(elemento);
+
+          sessionStorage.setItem("items", JSON.stringify(listaItemsPedido));
+          
+          swal(`Se agregó tu burguer ${elemento.nombre}`,"","success");
+          miPedido.renderPedido();
         })
 
       } else if (elemento.id[0] === 'b') {
@@ -85,76 +167,26 @@ class Menu {
         const boton = document.getElementById(`${elemento.id}birra`);
 
         boton.addEventListener('click', () => {
-          objPedido.cargarPedido(elemento, 1);
-          alert(`Se agrego tu birra: ${elemento.nombre}`);
-          objPedido.renderPedido();
+          
+          let listaItemsPedido;
+          let itemsSessionStorage = JSON.parse(sessionStorage.getItem('items'));
+
+          if (itemsSessionStorage) {
+            listaItemsPedido = itemsSessionStorage;
+          } else {
+            listaItemsPedido = [];
+          }
+
+          listaItemsPedido.push(elemento);
+
+          sessionStorage.setItem("items", JSON.stringify(listaItemsPedido));
+
+          swal(`Se agregó tu birra ${elemento.nombre}`,"","success");
+          miPedido.renderPedido();
         })
       }
     })
   }
 }
 
-class Pedido {
-  constructor() {
-    this.orden = [];
-    this.costoTotal = 0;
-  }
-
-  cargarPedido(obj, cantidad) {
-    for (let index = 1; index <= cantidad; index++) {
-      this.orden.push(obj);
-    }
-  
-  }
-
-  calcularCostoTotal() {
-    this.costoTotal = this.orden.reduce((acu, el) => acu + el.precio, 0);
-  }
-
-  renderPedido() {
-
-    const contMiPedido = document.getElementById('contPedido');
-    const contPrecioTotal = document.getElementById('precioTotal');
-    const newRow = document.createElement('tr');
-    let count = 1;
-
-    this.orden.forEach((el) => {
-      newRow.innerHTML = `
-            <th>${count}</th>
-            <td>${el.nombre}</td>
-            <td>$ ${el.precio}</td>
-          `;
-      contMiPedido.appendChild(newRow);
-      count += 1;
-    })
-
-    this.calcularCostoTotal();
-    contPrecioTotal.innerText = `$ ${this.costoTotal}`;
-
-  }
-}
-
-class Hamburguesa {
-  constructor(id, nombre, ingred1, ingred2, ingred3, aderezo, precio) {
-    this.id = id;
-    this.nombre = nombre;
-    this.ingred1 = ingred1;
-    this.ingred2 = ingred2;
-    this.ingred3 = ingred3;
-    this.aderezo = aderezo;
-    this.precio = precio;
-  }
-}
-
-class Birra {
-  constructor(id, nombre, gradAlco, precio) {
-    this.id = id;
-    this.nombre = nombre;
-    this.gradAlco = gradAlco;
-    this.precio = precio;
-  }
-}
-
-const title = (word) => word[0].toUpperCase() + word.substring(1).toLowerCase();
-
-export { Menu, Pedido, Hamburguesa, Birra, title }
+export { Hamburguesa, Birra, title, Pedido, Menu}

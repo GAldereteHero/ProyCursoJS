@@ -72,14 +72,14 @@
           </div>
       </div>
     </section>
-    <div class="block"></div>
+    <div class="container mt-6"></div>
     <section>
       <div class="container is-widescreen">
           <div class="columns" id="Birras">
           </div>
       </div>
     </section>
-    <div class="block"></div>
+    <div class="container mt-6"></div>
     <section id="miPedido">
       <div class="container is-widescreen">
         <div class="notification is-warning">
@@ -89,11 +89,15 @@
                 <th>Item</th>
                 <th>Descripción</th>
                 <th>Precio</th>
+                <th>Cantidad</th>
+                <th>Importe</th>
               </tr>
             </thead>
             <tfoot>
               <tr>
                 <th>Tu pedido</th>
+                <th></th>
+                <th></th>
                 <th>Precio total</th>
                 <th id="precioTotal"></th>
               </tr>
@@ -112,8 +116,8 @@
       </p>
     </div>
   </footer>
-  <script src="./js/index.js" type="module"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <script src="./js/metaData.js" type="module"></script>
+  <script src="./js/index.js" type="module"></script>
 </body>
-
 </html>

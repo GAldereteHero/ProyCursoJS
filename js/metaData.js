@@ -37,8 +37,8 @@ class Pedido {
   // }
 
   calcularCostoTotal() {
-    let itemsSessionStorage = JSON.parse(sessionStorage.getItem('items'));
-    this.costoTotal = itemsSessionStorage.reduce((acu, el) => acu + el.precio, 0);
+    let itemssessionStorage = JSON.parse(sessionStorage.getItem('items'));
+    this.costoTotal = itemssessionStorage.reduce((acu, el) => acu + el.precio * el.cantidad, 0);
   }
 
   renderPedido() {
@@ -46,10 +46,10 @@ class Pedido {
     let contMiPedido = document.getElementById('contPedido');
     contMiPedido.innerHTML = '';
     let contPrecioTotal = document.getElementById('precioTotal');
-    let itemsSessionStorage = JSON.parse(sessionStorage.getItem('items'));
+    let itemssessionStorage = JSON.parse(sessionStorage.getItem('items'));
     let count = 1;
-    
-    itemsSessionStorage.forEach((el) => {
+
+    itemssessionStorage.forEach((el) => {
       let newRow = document.createElement('tr');
       newRow.innerHTML = `
             <th>${count}</th>
@@ -65,6 +65,17 @@ class Pedido {
     this.calcularCostoTotal();
     contPrecioTotal.innerText = `$ ${this.costoTotal}`;
 
+  }
+
+  borrarPedido() {
+    let listaItemsPedido;
+    // let itemssessionStorage = JSON.parse(sessionStorage.getItem('items'));
+
+    listaItemsPedido = [];
+    sessionStorage.setItem("items", JSON.stringify(listaItemsPedido));
+
+    swal(`Se eliminó tu pedido`, "", "error");
+    this.renderPedido();
   }
 }
 
@@ -123,15 +134,20 @@ class Menu {
 
           if (itemsSessionStorage) {
             listaItemsPedido = itemsSessionStorage;
+            if (!listaItemsPedido.some( (el) => el.nombre === elemento.nombre) ) {
+              listaItemsPedido.push(elemento);
+              sessionStorage.setItem("items", JSON.stringify(listaItemsPedido));
+              
+            } else {
+              let item = listaItemsPedido.find( (el) => el.nombre === elemento.nombre)
+              item.cantidad +=1;
+              sessionStorage.setItem("items", JSON.stringify(listaItemsPedido));
+            }
           } else {
             listaItemsPedido = [];
           }
 
-          listaItemsPedido.push(elemento);
-
-          sessionStorage.setItem("items", JSON.stringify(listaItemsPedido));
-          
-          swal(`Se agregó tu burguer ${elemento.nombre}`,"","success");
+          swal(`Se agregó tu burguer ${elemento.nombre}`, "", "success");
           miPedido.renderPedido();
         })
 
@@ -167,21 +183,27 @@ class Menu {
         const boton = document.getElementById(`${elemento.id}birra`);
 
         boton.addEventListener('click', () => {
-          
+
           let listaItemsPedido;
           let itemsSessionStorage = JSON.parse(sessionStorage.getItem('items'));
 
           if (itemsSessionStorage) {
             listaItemsPedido = itemsSessionStorage;
+            if (!listaItemsPedido.some( (el) => el.nombre === elemento.nombre) ) {
+              listaItemsPedido.push(elemento);
+              console.log(listaItemsPedido);
+              sessionStorage.setItem("items", JSON.stringify(listaItemsPedido));
+              
+            } else {
+              let item = listaItemsPedido.find( (el) => el.nombre === elemento.nombre)
+              item.cantidad +=1;
+              sessionStorage.setItem("items", JSON.stringify(listaItemsPedido));
+            }
           } else {
             listaItemsPedido = [];
           }
 
-          listaItemsPedido.push(elemento);
-
-          sessionStorage.setItem("items", JSON.stringify(listaItemsPedido));
-
-          swal(`Se agregó tu birra ${elemento.nombre}`,"","success");
+          swal(`Se agregó tu birra ${elemento.nombre}`, "", "success");
           miPedido.renderPedido();
         })
       }
@@ -189,4 +211,4 @@ class Menu {
   }
 }
 
-export { Hamburguesa, Birra, title, Pedido, Menu}
+export { Hamburguesa, Birra, title, Pedido, Menu }

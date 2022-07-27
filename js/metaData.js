@@ -118,7 +118,7 @@ class Menu {
                 </div>
                 <div class="card-footer">
                   <div class="card-footer-item">
-                    <div class="button is-warning" id="${elemento.id}burguer">Añadir</div>
+                    <div class="button is-warning is-rounded" id="${elemento.id}burguer">Añadir</div>
                   </div> 
                 </div>
             </div>`;
@@ -174,7 +174,7 @@ class Menu {
             </div>
             <div class="card-footer">
               <div class="card-footer-item">
-                <div class="button is-warning" id="${elemento.id}birra">Añadir</div>
+                <div class="button is-warning is-rounded" id="${elemento.id}birra">Añadir</div>
               </div> 
             </div>
           </div>`;

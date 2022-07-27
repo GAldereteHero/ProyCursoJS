@@ -14,7 +14,7 @@ miMenu.cargarItem(new Hamburguesa('h3', "Francesa", "Lechuga", "Cebolla carameli
 miMenu.cargarItem(new Hamburguesa('h4', "Americana", "Bacon", "Queso cheddar", "Huevo", "Salsa ahumada", 950, 1));
 
 miMenu.cargarItem(new Birra('b1', "Honey", "5%", 200, 1));
-miMenu.cargarItem(new Birra('b2', "Trigo", "6%", 250, 1));
+miMenu.cargarItem(new Birra('b2', "Weisse", "6%", 250, 1));
 miMenu.cargarItem(new Birra('b3', "Scottish", "7%", 300, 1));
 miMenu.cargarItem(new Birra('b4', "Red Ale", "8%", 350, 1));
 

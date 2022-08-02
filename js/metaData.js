@@ -29,16 +29,9 @@ class Pedido {
     this.costoTotal = 0;
   }
 
-  // cargarPedido(obj, cantidad) {
-  //   for (let index = 1; index <= cantidad; index++) {
-  //     this.orden.push(obj);
-  //   }
-
-  // }
-
   calcularCostoTotal() {
-    let itemssessionStorage = JSON.parse(sessionStorage.getItem('items'));
-    this.costoTotal = itemssessionStorage.reduce((acu, el) => acu + el.precio * el.cantidad, 0);
+    let itemslocalStorage = JSON.parse(localStorage.getItem('items')) || [];
+    this.costoTotal = itemslocalStorage.reduce((acu, el) => acu + el.precio * el.cantidad, 0);
   }
 
   renderPedido() {
@@ -46,10 +39,10 @@ class Pedido {
     let contMiPedido = document.getElementById('contPedido');
     contMiPedido.innerHTML = '';
     let contPrecioTotal = document.getElementById('precioTotal');
-    let itemssessionStorage = JSON.parse(sessionStorage.getItem('items'));
+    let itemslocalStorage = JSON.parse(localStorage.getItem('items')) || [];
     let count = 1;
 
-    itemssessionStorage.forEach((el) => {
+    itemslocalStorage.forEach((el) => {
       let newRow = document.createElement('tr');
       newRow.innerHTML = `
             <th>${count}</th>
@@ -68,12 +61,9 @@ class Pedido {
   }
 
   borrarPedido() {
-    let listaItemsPedido;
-    // let itemssessionStorage = JSON.parse(sessionStorage.getItem('items'));
-
-    listaItemsPedido = [];
-    sessionStorage.setItem("items", JSON.stringify(listaItemsPedido));
-
+    
+    // localStorage.setItem("items", JSON.stringify([]));
+    localStorage.removeItem("items");
     swal(`Se eliminó tu pedido`, "", "error");
     this.renderPedido();
   }
@@ -118,7 +108,7 @@ class Menu {
                 </div>
                 <div class="card-footer">
                   <div class="card-footer-item">
-                    <div class="button is-warning is-rounded" id="${elemento.id}burguer">Añadir</div>
+                    <div class="button is-warning is-rounded" id="${elemento.id}burguer">Agregar</div>
                   </div> 
                 </div>
             </div>`;
@@ -130,21 +120,19 @@ class Menu {
         boton.addEventListener('click', () => {
 
           let listaItemsPedido;
-          let itemsSessionStorage = JSON.parse(sessionStorage.getItem('items'));
+          let itemslocalStorage = JSON.parse(localStorage.getItem('items')) || [];
 
-          if (itemsSessionStorage) {
-            listaItemsPedido = itemsSessionStorage;
+          if (itemslocalStorage){
+            listaItemsPedido = itemslocalStorage;
             if (!listaItemsPedido.some( (el) => el.nombre === elemento.nombre) ) {
               listaItemsPedido.push(elemento);
-              sessionStorage.setItem("items", JSON.stringify(listaItemsPedido));
+              localStorage.setItem("items", JSON.stringify(listaItemsPedido));
               
             } else {
               let item = listaItemsPedido.find( (el) => el.nombre === elemento.nombre)
               item.cantidad +=1;
-              sessionStorage.setItem("items", JSON.stringify(listaItemsPedido));
+              localStorage.setItem("items", JSON.stringify(listaItemsPedido));
             }
-          } else {
-            listaItemsPedido = [];
           }
 
           swal(`Se agregó tu burguer ${elemento.nombre}`, "", "success");
@@ -174,7 +162,7 @@ class Menu {
             </div>
             <div class="card-footer">
               <div class="card-footer-item">
-                <div class="button is-warning is-rounded" id="${elemento.id}birra">Añadir</div>
+                <div class="button is-warning is-rounded" id="${elemento.id}birra">Agregar</div>
               </div> 
             </div>
           </div>`;
@@ -185,22 +173,19 @@ class Menu {
         boton.addEventListener('click', () => {
 
           let listaItemsPedido;
-          let itemsSessionStorage = JSON.parse(sessionStorage.getItem('items'));
+          let itemslocalStorage = JSON.parse(localStorage.getItem('items')) || [];
 
-          if (itemsSessionStorage) {
-            listaItemsPedido = itemsSessionStorage;
+          if (itemslocalStorage) {
+            listaItemsPedido = itemslocalStorage;
             if (!listaItemsPedido.some( (el) => el.nombre === elemento.nombre) ) {
               listaItemsPedido.push(elemento);
-              console.log(listaItemsPedido);
-              sessionStorage.setItem("items", JSON.stringify(listaItemsPedido));
+              localStorage.setItem("items", JSON.stringify(listaItemsPedido));
               
             } else {
               let item = listaItemsPedido.find( (el) => el.nombre === elemento.nombre)
               item.cantidad +=1;
-              sessionStorage.setItem("items", JSON.stringify(listaItemsPedido));
+              localStorage.setItem("items", JSON.stringify(listaItemsPedido));
             }
-          } else {
-            listaItemsPedido = [];
           }
 
           swal(`Se agregó tu birra ${elemento.nombre}`, "", "success");

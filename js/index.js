@@ -9,18 +9,12 @@ const hamburguesas = ["Alemana","Mexicana","Francesa","Americana"];
 console.log(...arraySaludos);
 
 function recomendacionesChef(){
-
     const [,, a,b] = hamburguesas;
     console.log(a,b);
-        
-    
 }
 
 const miMenu = new Menu();
 const miPedido = new Pedido();
-
-// Inicializamos el carrito unicamente en caso de estar vacío. 
-JSON.parse(localStorage.getItem('items')) ? null : localStorage.setItem("items", JSON.stringify([]))
 
 miMenu.cargarItem(new Hamburguesa('h1', "Alemana", "Cebolla rebozada", "Bacon", "Queso cheddar", "Barbacoa", 800, 1));
 miMenu.cargarItem(new Hamburguesa('h2', "Mexicana", "Guacamole", "Chili", "Queso cheddar", "Salsa ahumada", 850, 1));
@@ -36,14 +30,51 @@ miMenu.renderMenu(miPedido);
 
 recomendacionesChef();
 
-const btVerMiPedido = document.getElementById('verMiPedido');
+// Inicializamos el pedido. 
+JSON.parse(localStorage.getItem('items')) ? miPedido.renderPedido() : localStorage.setItem("items", JSON.stringify([]));
 
+const btVerMiPedido = document.getElementById('verMiPedido');
 btVerMiPedido.addEventListener('click', () => {
     miPedido.renderPedido();
 })
 
 const btBorrarMiPedido = document.getElementById('borrarMiPedido');
-
 btBorrarMiPedido.addEventListener('click', () => {
     miPedido.borrarPedido();
+    Swal.fire({
+        title: 'Ups!',
+        text: `Se eliminó tu pedido`,
+        icon: 'error',
+        confirmButtonText: 'Ok'
+    })
 })
+
+const btEnviarMiPedido = document.getElementById('enviarMiPedido');
+btEnviarMiPedido.addEventListener('click', () => {
+
+    if(JSON.parse(localStorage.getItem('items'))){
+        miPedido.borrarPedido();
+        Toastify({
+            text: "Tu pedido llego a la cocina!",
+            style: {background: '#48C78E',},
+            gravity: "bottom", // `top` or `bottom`
+            position: "right", // `left`, `center` or `right`
+            offset: {
+                x: 10, // horizontal axis - can be a number or a string indicating unity. eg: '2em'
+                y: 75 // vertical axis - can be a number or a string indicating unity. eg: '2em'
+            }
+        }).showToast();
+    }else {
+        Toastify({
+            text: "Tu pedido está vacío",
+            style: {background: "#F14668",},
+            gravity: "bottom", // `top` or `bottom`
+            position: "right", // `left`, `center` or `right`
+            offset: {
+                x: 10, // horizontal axis - can be a number or a string indicating unity. eg: '2em'
+                y: 75 // vertical axis - can be a number or a string indicating unity. eg: '2em'
+            }
+          }).showToast();
+    }
+})
+

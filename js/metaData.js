@@ -62,9 +62,7 @@ class Pedido {
 
   borrarPedido() {
     
-    // localStorage.setItem("items", JSON.stringify([]));
     localStorage.removeItem("items");
-    swal(`Se eliminó tu pedido`, "", "error");
     this.renderPedido();
   }
 }
@@ -135,7 +133,13 @@ class Menu {
             }
           }
 
-          swal(`Se agregó tu burguer ${elemento.nombre}`, "", "success");
+          Swal.fire({
+            title: 'Genial!',
+            text: `Se agregó tu burguer ${elemento.nombre}`,
+            icon: 'success',
+            confirmButtonText: 'Ok'
+          })
+    
           miPedido.renderPedido();
         })
 
@@ -188,7 +192,13 @@ class Menu {
             }
           }
 
-          swal(`Se agregó tu birra ${elemento.nombre}`, "", "success");
+          Swal.fire({
+            title: 'Genial!',
+            text: `Se agregó tu birra ${elemento.nombre}`,
+            icon: 'success',
+            confirmButtonText: 'Ok'
+          })
+          
           miPedido.renderPedido();
         })
       }

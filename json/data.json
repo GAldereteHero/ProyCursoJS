@@ -1,0 +1,11 @@
+[
+    {"id": "h1","nombre": "Alemana","ingred1": "Cebolla rebozada","ingred2": "Bacon","ingred3": "Queso cheddar","aderezo": "Barbacoa","precio": 800,"cantidad": 1},
+    {"id": "h2","nombre": "Mexicana","ingred1": "Guacamole", "ingred2": "Chili","ingred3": "Queso tybo","aderezo": "Salsa picante","precio": 850,"cantidad": 1},
+    {"id": "h3","nombre": "Francesa","ingred1": "Lechuga", "ingred2": "Cebolla caramelizada","ingred3": "Queso Brie","aderezo": "Salsa de miel","precio": 900,"cantidad": 1},
+    {"id": "h4","nombre": "Americana","ingred1": "Bacon", "ingred2": "Queso cheddar","ingred3": "Huevo","aderezo": "Salsa ahumada","precio": 950,"cantidad": 1},
+
+    {"id":"b1","nombre": "Honey","gradAlco": "5%","precio": 200,"cantidad": 1},
+    {"id":"b2","nombre": "Weisse","gradAlco": "6%","precio": 250,"cantidad": 1},
+    {"id":"b3","nombre": "Scottish","gradAlco": "7%","precio": 300,"cantidad": 1},
+    {"id":"b4","nombre": "Red Ale","gradAlco": "8%","precio": 350,"cantidad": 1}
+]

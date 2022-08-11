@@ -22,12 +22,13 @@ const miMenu = new Menu();
 const miPedido = new Pedido();
 
 const traerItems = async () => {
-    const resp = await fetch(`../json/data.json`)
-    const data = await resp.json()
-   
+    const resp = await fetch('https://run.mocky.io/v3/1803c3f7-4738-4bab-b647-38954cdf23d9');
+    const data = await resp.json();
+    
     data.forEach((producto) => {
         miMenu.cargarItem(producto);
     })
+
 
     miMenu.renderMenu(miPedido);
 }
